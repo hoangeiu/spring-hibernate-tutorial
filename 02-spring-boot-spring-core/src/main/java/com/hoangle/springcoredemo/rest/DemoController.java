@@ -15,12 +15,20 @@ public class DemoController {
 
     // define a constructor for DI
     // @Autowired annotation tells Spring to inject a dependency
+
+//    @Autowired
+//    public DemoController(@Qualifier("cricketCoach") Coach coach, @Qualifier("cricketCoach") Coach anotherCoach) {
+//        System.out.println("In constructor: " + getClass().getSimpleName());
+//        this.coach = coach;
+//        this.anotherCoach = anotherCoach;
+//    }
+
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach coach, @Qualifier("cricketCoach") Coach anotherCoach) {
+    public DemoController(@Qualifier("swimCoach") Coach coach) {
         System.out.println("In constructor: " + getClass().getSimpleName());
         this.coach = coach;
-//        this.anotherCoach = anotherCoach;
     }
+
 
     @GetMapping("/dailyworkout")
     public String getDailyWorkout() {
