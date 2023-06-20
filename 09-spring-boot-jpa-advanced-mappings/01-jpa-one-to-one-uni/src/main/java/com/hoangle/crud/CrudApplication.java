@@ -20,8 +20,25 @@ public class CrudApplication {
 		return runner -> {
 //			createInstructor(instructorDAO);
 //			findInstructor(instructorDAO);
-			deleteInstructor(instructorDAO);
+//			deleteInstructor(instructorDAO);
+//			findInstructorDetail(instructorDAO);
+			deleteInstructorDetail(instructorDAO);
 		};
+	}
+
+	private void deleteInstructorDetail(InstructorDAO instructorDAO) {
+		int theId = 3;
+		System.out.println("Deleting instructor detail id: " + theId);
+		instructorDAO.deleteInstructorDetailById(theId);
+		System.out.println("DONE!");
+	}
+
+	private void findInstructorDetail(InstructorDAO instructorDAO) {
+		int theId = 1;
+		System.out.println("Finding instructor detail id: " + theId);
+		InstructorDetail instructorDetail = instructorDAO.findInstructorDetailById(theId);
+		System.out.println("Instructor detail: " + instructorDetail);
+		System.out.println("The associated instructor: " + instructorDetail.getInstructor());
 	}
 
 	private void deleteInstructor(InstructorDAO instructorDAO) {
@@ -40,9 +57,9 @@ public class CrudApplication {
 	}
 
 	private void createInstructor(InstructorDAO instructorDAO) {
-		Instructor instructor = new Instructor("Susan", "Cain", "susan@cain.com");
+		Instructor instructor = new Instructor("Hoang", "Le", "hoang@le.com");
 
-		InstructorDetail instructorDetail = new InstructorDetail("http://youtube.com", "Writing book");
+		InstructorDetail instructorDetail = new InstructorDetail("http://youtube.com", "Reading");
 
 		instructor.setInstructorDetail(instructorDetail);
 
