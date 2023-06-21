@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CrudApplication {
 
@@ -24,8 +26,41 @@ public class CrudApplication {
 //			deleteInstructor(instructorDAO);
 //			findInstructorDetail(instructorDAO);
 //			deleteInstructorDetail(instructorDAO);
-			createInstructorWithCourses(instructorDAO);
+//			createInstructorWithCourses(instructorDAO);
+//			findInstructorWithCourses(instructorDAO);
+			findCoursesForInstructor(instructorDAO);
 		};
+	}
+
+	private void findCoursesForInstructor(InstructorDAO instructorDAO) {
+		int theId = 1;
+		System.out.println("Finding instructor id: " + theId);
+
+		Instructor instructor = instructorDAO.findInstructorById(theId);
+
+		System.out.println("Instructor: " + instructor);
+
+		// find courses for instructor
+		System.out.println("Finding courses for instructor id: " + theId);
+		List<Course> courses = instructorDAO.findCoursesByInstructorId(theId);
+
+		instructor.setCourses(courses);
+
+		System.out.println("The associated courses: " + instructor.getCourses());
+
+		System.out.println("DONE!");
+	}
+
+	private void findInstructorWithCourses(InstructorDAO instructorDAO) {
+		int theId = 1;
+		System.out.println("Finding instructor id: " + theId);
+
+		Instructor instructor = instructorDAO.findInstructorById(theId);
+
+		System.out.println("Instructor: " + instructor);
+		System.out.println("The associated courses: " + instructor.getCourses());
+
+		System.out.println("DONE!");
 	}
 
 	private void createInstructorWithCourses(InstructorDAO instructorDAO) {

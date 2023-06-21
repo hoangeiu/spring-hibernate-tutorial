@@ -1,10 +1,14 @@
 package com.hoangle.crud.dao;
 
+import com.hoangle.crud.entity.Course;
 import com.hoangle.crud.entity.Instructor;
 import com.hoangle.crud.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class InstructorDAOImpl implements InstructorDAO{
@@ -48,5 +52,15 @@ public class InstructorDAOImpl implements InstructorDAO{
         instructorDetail.getInstructor().setInstructorDetail(null);
 
         entityManager.remove(instructorDetail);
+    }
+
+    @Override
+    public List<Course> findCoursesByInstructorId(int theId) {
+        TypedQuery<Course> query = entityManager.createQuery("FROM Course WHERE instructor.id = :data", Course.class);
+        query.setParameter("data", theId);
+
+        List<Course> courses = query.getResultList();
+
+        return courses;
     }
 }
