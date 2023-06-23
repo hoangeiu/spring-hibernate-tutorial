@@ -20,4 +20,12 @@ public interface InstructorDAO {
     List<Course> findCoursesByInstructorId(int theId);
 
     Instructor findInstructorByIdJoinFetch(int theId);
+
+    void update(Instructor instructor);
+
+    void update(Course course);
+
+    Course findCourseById(int theId);
+
+    void deleteCourseById(int theId);
 }

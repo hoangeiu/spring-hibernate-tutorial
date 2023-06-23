@@ -33,6 +33,14 @@ public class InstructorDAOImpl implements InstructorDAO{
     @Transactional
     public void deleteInstructorById(int theId) {
         Instructor instructor = entityManager.find(Instructor.class, theId);
+        
+        // get the courses 
+        List<Course> courses = instructor.getCourses();
+        
+        // break association of all courses for the instructor
+        for (Course course: courses) {
+            course.setInstructor(null);
+        }
 
         entityManager.remove(instructor);
     }
@@ -76,5 +84,32 @@ public class InstructorDAOImpl implements InstructorDAO{
         Instructor instructor = query.getSingleResult();
 
         return instructor;
+    }
+
+    @Override
+    @Transactional
+    public void update(Instructor instructor) {
+        entityManager.merge(instructor);
+    }
+
+    @Override
+    @Transactional
+    public void update(Course course) {
+        entityManager.merge(course);
+    }
+
+    @Override
+    public Course findCourseById(int theId) {
+        Course course = entityManager.find(Course.class, theId);
+
+        return course;
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseById(int theId) {
+        Course course = entityManager.find(Course.class, theId);
+
+        entityManager.remove(course);
     }
 }
